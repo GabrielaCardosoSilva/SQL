@@ -1,0 +1,33 @@
+-- ----------------------------------------------------------------------------------------
+-- Gabriel Issa Shammas (GIS) - 01 de janeiro de 2000 a 31 de dezembro de 2030
+-- ----------------------------------------------------------------------------------------
+-- PROJ001- BD Geográfico
+--
+-- A empresa GIS All Corps, como empresa holding do grupo GIS, deseja efetuar uma modelagem
+-- de alguns de seus negócios.
+-- Para isso, disponibilizou para a equipe um Banco de Dados Georgráfico,  que será atuali-
+-- zado ao longo das próximas semanas,  para que faça a integração com os projetos de mode-
+-- lagem que serão realizados.
+-- Estão disponíveis a criação e a carga de cada tabela neste Banco de Dados.
+-- Ao longo das semanas, novas informações a respeito serão oferecidas.
+-- O Banco de Dados Geográfico foi construído para ser utilizado juntamente com os projetos
+-- que serão elaborados pelos alunos.
+-- Os scripts de criação e de carga (load)  de cada uma das tabelas do  Banco de Dados Geo-
+-- gráfico estão disponibilizados na pasta do Projeto 001, podendo sofrer incrementos  e/ou
+-- alterações.
+-- Cada grupo irá executar esses scripts de modo a deixar este banco de dados pronto para o
+-- seu uso.
+-- Todos os scripts desse projeto (Projeto 001)  apontam para um Banco de Dados  denominado
+-- BDGIS. 
+-- No transcorrer das aulas serão encaminhadas atividades de consultas a esse Banco.
+-- Os demais projetos serão integrados a esse projeto,  inicialmente através de uma  tabela
+-- comum que é a tabela de CIDADES.
+-- Recomendamos que, para este projeto especificamente, não haja alteração de nomes das ta-
+-- belas e nem do Banco de Dados.  No entanto, cada grupo é livre para promover as mudanças
+-- que julgar mais conveniente.
+--
+-- ----------------------------------------------------------------------------------------
+-- Fim PROJ001- BD Geográfico
+-- ----------------------------------------------------------------------------------------
+--
+--

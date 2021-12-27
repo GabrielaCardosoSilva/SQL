@@ -1,0 +1,1117 @@
+-- T1001C- PROJ002: Gerar os scripts de criação das tabelas.
+
+
+   USE BDGIS;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABELAS QUE NÃO POSSUEM CHAVE ESTRANGEIRA:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_SUPERVISOR
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_SUPERVISOR')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_SUPERVISOR')
+) 
+	ALTER TABLE dbo.GIS_T1001C_SUPERVISOR
+	DROP CONSTRAINT CK_GIS_T1001C_SUPERVISOR;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_SUPERVISOR')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_SUPERVISOR;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_SUPERVISOR (
+	CODIGO INT NOT NULL, 
+	NOME VARCHAR (45) NOT NULL,
+	VERIFICACAO INT NOT NULL,
+	DATA_NASCIMENTO DATE NOT NULL, 
+	CPF NUMERIC (11,0) NOT NULL, 
+	CELULAR NUMERIC (11,0)NOT NULL,
+	EMAIL VARCHAR (45) NULL,
+	GENERO CHAR NULL,
+	CONSTRAINT PK_GIS_T1001C_SUPERVISOR PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_SUPERVISOR_DATA_NASCIMENTO CHECK (DATEDIFF(YEAR, DATA_NASCIMENTO, GETDATE()) >= 21)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_MOTORISTA
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_MOTORISTA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_MOTORISTA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_MOTORISTA
+	DROP CONSTRAINT CK_GIS_T1001C_MOTORISTA;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_MOTORISTA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_MOTORISTA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_MOTORISTA (
+	CODIGO INT NOT NULL, 
+	NOME VARCHAR (45) NOT NULL,
+	DATA_NASCIMENTO DATE NOT NULL, 
+	CPF NUMERIC (11,0) NOT NULL, 
+	CELULAR NUMERIC (11,0)NOT NULL,
+	EMAIL VARCHAR (45) NULL,
+	GENERO CHAR NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_MOTORISTA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_MOTORISTA_DATA_NASCIMENTO CHECK (DATEDIFF(YEAR, DATA_NASCIMENTO, GETDATE()) >= 21)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_CLIENTE
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_CLIENTE')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_CLIENTE')
+) 
+	ALTER TABLE dbo.GIS_T1001C_CLIENTE
+	DROP CONSTRAINT CK_GIS_T1001C_CLIENTE;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_CLIENTE')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_CLIENTE;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_CLIENTE (
+	CODIGO INT NOT NULL, 
+	NOME VARCHAR (45) NOT NULL,
+	DATA_NASCIMENTO DATE NOT NULL, 
+	CPF NUMERIC (11,0) NOT NULL, 
+	CELULAR NUMERIC (11,0)NOT NULL,
+	EMAIL VARCHAR (45) NULL,
+	GENERO CHAR NULL,
+	CONSTRAINT PK_GIS_T1001C_CLIENTE PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_CLIENTE_DATA_NASCIMENTO CHECK (DATEDIFF(YEAR, DATA_NASCIMENTO, GETDATE()) >= 18)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_VEICULO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_VEICULO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_VEICULO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_VEICULO
+	DROP CONSTRAINT CK_GIS_T1001C_VEICULO;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_VEICULO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_VEICULO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_VEICULO (
+	CODIGO INT NOT NULL, 
+	TIPO VARCHAR (45) NULL,
+	EIXOS INT NOT NULL,
+	MARCA VARCHAR (20) NULL,
+	COR VARCHAR (20) NULL, 
+	ANO_FABRICACAO VARCHAR (4) NULL, 
+	DATA_AQUISICAO DATE NOT NULL,
+	SEGURO VARCHAR (45),
+	CONSTRAINT PK_GIS_T1001C_VEICULO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_VEICULO_TEMPO_USO CHECK (DATEDIFF(YEAR, DATA_AQUISICAO, GETDATE()) < 5)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_PEDAGIO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_PEDAGIO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_PEDAGIO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_PEDAGIO
+	DROP CONSTRAINT CK_GIS_T1001C_PEDAGIO;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_PEDAGIO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_PEDAGIO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_PEDAGIO (
+	CODIGO INT NOT NULL,
+	LOCALIZACAO VARCHAR(45) NOT NULL,
+	VALOR FLOAT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_PEDAGIO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_OFICINA
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_OFICINA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_OFICINA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_OFICINA
+	DROP CONSTRAINT CK_GIS_T1001C_OFICINA;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_OFICINA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_OFICINA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_OFICINA (
+	CODIGO INT NOT NULL,
+	OFICINA VARCHAR(45) NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_OFICINA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_FRETE_TABELADO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_FRETE_TABELADO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_FRETE_TABELADO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_FRETE_TABELADO
+	DROP CONSTRAINT CK_GIS_T1001C_FRETE_TABELADO;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_FRETE_TABELADO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_FRETE_TABELADO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_FRETE_TABELADO (
+	CODIGO INT NOT NULL,
+	TIPO_CARGA VARCHAR(45) NOT NULL,
+	EIXOS INT NOT NULL,
+	PRECO_CCD FLOAT NOT NULL,
+	PRECO_CC FLOAT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_FRETE_TABELADO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TABELAS COM A CHAVE ESTRANGEIRA
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_LOCALIZACAO_INICIAL
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_LOCALIZACAO_INICIAL')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_LOCALIZACAO_INICIAL')
+) 
+	ALTER TABLE dbo.GIS_T1001C_LOCALIZACAO_INICIAL
+	DROP CONSTRAINT CK_GIS_T1001C_LOCALIZACAO_INICIAL;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_LOCALIZACAO_INICIAL')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_LOCALIZACAO_INICIAL;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_LOCALIZACAO_INICIAL (
+	CODIGO INT NOT NULL, 
+	CIDADES_CODIGO_PAIS NUMERIC(3,0) NOT NULL,
+	CIDADES_UF CHAR(3) NOT NULL,
+	CIDADES_CIDADE CHAR(45) NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_LOCALIZACAO_INICIAL PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_LOCALIZACAO_INICIAL FOREIGN KEY (CIDADES_CODIGO_PAIS, CIDADES_UF, CIDADES_CIDADE) References GIS_TB07S001_CIDADES (cod_pais, uf, cidade) 
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_LOCALIZACAO_FINAL
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_LOCALIZACAO_FINAL')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_LOCALIZACAO_FINAL')
+) 
+	ALTER TABLE dbo.GIS_T1001C_LOCALIZACAO_FINAL
+	DROP CONSTRAINT CK_GIS_T1001C_LOCALIZACAO_FINAL;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_LOCALIZACAO_FINAL')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_LOCALIZACAO_FINAL;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_LOCALIZACAO_FINAL (
+	CODIGO INT NOT NULL, 
+	CIDADES_CODIGO_PAIS NUMERIC(3,0) NOT NULL,
+	CIDADES_UF CHAR(3) NOT NULL,
+	CIDADES_CIDADE CHAR(45) NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_LOCALIZACAO_FINAL PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_LOCALIZACAO_FINAL FOREIGN KEY (CIDADES_CODIGO_PAIS, CIDADES_UF, CIDADES_CIDADE) References GIS_TB07S001_CIDADES (cod_pais, uf, cidade)
+);
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_TRAJETO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_TRAJETO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_TRAJETO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_TRAJETO
+	DROP CONSTRAINT CK_GIS_T1001C_TRAJETO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_TRAJETO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_TRAJETO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_TRAJETO (
+	CODIGO INT NOT NULL,
+	QUILOMETRAGEM FLOAT NOT NULL,
+	LOCALIZACAO_INICIAL INT NOT NULL,
+	LOCALIZACAO_FINAL INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_TRAJETO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_TRANSACAO_LOCALIZACAO_INICIAL FOREIGN KEY (LOCALIZACAO_INICIAL) REFERENCES dbo.GIS_T1001C_LOCALIZACAO_INICIAL (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_TRANSACAO_LOCALIZACAO_FINAL FOREIGN KEY (LOCALIZACAO_FINAL) REFERENCES dbo.GIS_T1001C_LOCALIZACAO_FINAL (CODIGO)
+);
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_PEDAGIO_TRAJETO
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_PEDAGIO_TRAJETO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_PEDAGIO_TRAJETO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_PEDAGIO_TRAJETO
+	DROP CONSTRAINT CK_GIS_T1001C_PEDAGIO_TRAJETO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_PEDAGIO_TRAJETO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_PEDAGIO_TRAJETO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_PEDAGIO_TRAJETO (
+	PEDAGIO_CODIGO INT NOT NULL,
+	TRAJETO_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_PEDAGIO_TRAJETO PRIMARY KEY CLUSTERED (PEDAGIO_CODIGO, TRAJETO_CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_PEDAGIO_TRAJETO_PEDAGIO FOREIGN KEY (PEDAGIO_CODIGO) REFERENCES dbo.GIS_T1001C_PEDAGIO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_PEDAGIO_TRAJETO_TRAJETO FOREIGN KEY (TRAJETO_CODIGO) REFERENCES dbo.GIS_T1001C_TRAJETO (CODIGO)
+);
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- TABELA: dbo.GIS_T1001C_AUTORIZACAO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_AUTORIZACAO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_AUTORIZACAO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_AUTORIZACAO
+	DROP CONSTRAINT CK_GIS_T1001C_AUTORIZACAO;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_AUTORIZACAO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_AUTORIZACAO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_AUTORIZACAO (
+	CODIGO INT NOT NULL, 
+	"DATA" DATE NOT NULL,
+	HORA TIME NOT NULL, 
+	LOCALIZACAO VARCHAR (45) NOT NULL,
+	SUPERVISOR_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_AUTORIZACAO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_AUTORIZACAO_SUPERVISOR_CODIGO FOREIGN KEY (SUPERVISOR_CODIGO) REFERENCES dbo.GIS_T1001C_SUPERVISOR (CODIGO)
+); 
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_VIAGEM
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_VIAGEM')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_VIAGEM')
+) 
+	ALTER TABLE dbo.GIS_T1001C_VIAGEM
+	DROP CONSTRAINT CK_GIS_T1001C_VIAGEM;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_VIAGEM')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_VIAGEM;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_VIAGEM (
+	CODIGO INT NOT NULL,
+	VALOR_PADRAO FLOAT NOT NULL,
+	SALARIO FLOAT NOT NULL,
+	AUTORIZACAO_CODIGO INT NOT NULL,
+	TRAJETO_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_VIAGEM PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_VIAGEM_AUTORIZACAO FOREIGN KEY (AUTORIZACAO_CODIGO) REFERENCES dbo.GIS_T1001C_AUTORIZACAO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_VIAGEM_TRAJETO FOREIGN KEY (TRAJETO_CODIGO) REFERENCES dbo.GIS_T1001C_TRAJETO (CODIGO)
+);
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_SEGURO_MOTORISTA
+
+
+-- Eliminação da tabela, se existir.
+
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_SEGURO_MOTORISTA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_SEGURO_MOTORISTA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_SEGURO_MOTORISTA
+	DROP CONSTRAINT CK_GIS_T1001C_SEGURO_MOTORISTA;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_SEGURO_MOTORISTA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_SEGURO_MOTORISTA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_SEGURO_MOTORISTA (
+	CODIGO INT NOT NULL, 
+	SEGURO VARCHAR (100) NOT NULL, 
+	VIAGEM_CODIGO INT NOT NULL,
+	MOTORISTA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_SEGURO_MOTORISTA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_SEGURO_VIAGEM_CODIGO FOREIGN KEY (MOTORISTA_CODIGO) REFERENCES dbo.GIS_T1001C_MOTORISTA (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_SEGURO_MOTORISTA_CODIGO FOREIGN KEY (VIAGEM_CODIGO) REFERENCES dbo.GIS_T1001C_VIAGEM (CODIGO) ON DELETE CASCADE
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_DIARIO_DE_BORDO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_DIARIO_DE_BORDO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_DIARIO_DE_BORDO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_DIARIO_DE_BORDO
+	DROP CONSTRAINT CK_GIS_T1001C_DIARIO_DE_BORDO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_DIARIO_DE_BORDO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_DIARIO_DE_BORDO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_DIARIO_DE_BORDO (
+	CODIGO INT NOT NULL, 
+	VIAGEM_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_DIARIO_DE_BORDO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_DIARIO_DE_BORDO_VIAGEM FOREIGN KEY (VIAGEM_CODIGO) REFERENCES dbo.GIS_T1001C_VIAGEM (CODIGO)
+);
+
+
+
+-- ---	-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TABELA: dbo.GIS_T1001C_OCORRENCIA
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_OCORRENCIA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_OCORRENCIA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_OCORRENCIA
+	DROP CONSTRAINT CK_GIS_T1001C_OCORRENCIA;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_OCORRENCIA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_OCORRENCIA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_OCORRENCIA (
+	CODIGO INT NOT NULL,
+	"DATA" DATE NOT NULL, 
+	HORA TIME NOT NULL,
+	TIPO VARCHAR(45) NOT NULL,
+	VALOR FLOAT NULL,
+	MOTORISTA_CODIGO INT NOT NULL,
+	DIARIO_DE_BORDO_CODIGO INT NOT NULL,
+	VEICULO_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_OCORRENCIA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GGIS_T1001C_OCORRENCIA_MOTORISTA FOREIGN KEY (MOTORISTA_CODIGO) REFERENCES dbo.GIS_T1001C_MOTORISTA (CODIGO) ON DELETE CASCADE,
+	CONSTRAINT FK_GIS_T1001C_OCORRENCIA_DIARIO FOREIGN KEY (DIARIO_DE_BORDO_CODIGO) REFERENCES dbo.GIS_T1001C_DIARIO_DE_BORDO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_OCORRENCIA_VEICULO FOREIGN KEY (VEICULO_CODIGO) REFERENCES dbo.GIS_T1001C_VEICULO (CODIGO)
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_TRANSACAO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_TRANSACAO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_TRANSACAO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_TRANSACAO
+	DROP CONSTRAINT CK_GIS_T1001C_TRANSACAO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_TRANSACAO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_TRANSACAO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_TRANSACAO(
+	CODIGO INT NOT NULL, 
+	TIPO VARCHAR (20) NOT NULL,
+	VEICULO_CODIGO INT NOT NULL, 
+	CONSTRAINT PK_GIS_T1001C_TRANSACAO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_TRANSACAO_VEICULO_CODIGO FOREIGN KEY (VEICULO_CODIGO) REFERENCES dbo.GIS_T1001C_VEICULO (CODIGO)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_FUNCIONARIO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_FUNCIONARIO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_FUNCIONARIO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_FUNCIONARIO
+	DROP CONSTRAINT CK_GIS_T1001C_FUNCIONARIO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_FUNCIONARIO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_FUNCIONARIO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_FUNCIONARIO (
+	CODIGO INT NOT NULL, 
+	NOME VARCHAR (45) NOT NULL,
+	DATA_NASCIMENTO DATE NOT NULL, 
+	CPF NUMERIC (11,0) NOT NULL, 
+	CELULAR NUMERIC (11,0)NOT NULL,
+	EMAIL VARCHAR (45) NULL,
+	GENERO CHAR NOT NULL,
+	OFICINA_CODIGO INT NOT NULL, 
+	CONSTRAINT PK_GIS_T1001C_FUNCIONARIO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_FUNCIONARIO_OFICINA FOREIGN KEY (OFICINA_CODIGO) REFERENCES dbo.GIS_T1001C_OFICINA (CODIGO)
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_SERVICO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_SERVICO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_SERVICO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_SERVICO
+	DROP CONSTRAINT CK_GIS_T1001C_SERVICO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_SERVICO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_SERVICO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_SERVICO	(
+	CODIGO INT NOT NULL, 
+	TIPO VARCHAR (45) NOT NULL,
+	CLIENTE_CODIGO INT NOT NULL, 
+	CONSTRAINT PK_GIS_T1001C_SERVICO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_SERVICO_CLIENTE FOREIGN KEY (CLIENTE_CODIGO) REFERENCES dbo.GIS_T1001C_CLIENTE (CODIGO)
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_MERCADORIA
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_MERCADORIA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_MERCADORIA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_MERCADORIA
+	DROP CONSTRAINT CK_GIS_T1001C_MERCADORIA;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_MERCADORIA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_MERCADORIA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_MERCADORIA (
+	CODIGO INT NOT NULL, 
+	NOME VARCHAR (45) NOT NULL,
+	SERVICO_CODIGO INT NOT NULL, 
+	CONSTRAINT PK_GIS_T1001C_MERCADORIA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_MERCADORIA_SERVICO FOREIGN KEY (SERVICO_CODIGO) REFERENCES dbo.GIS_T1001C_SERVICO (CODIGO)
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_MANIFESTO
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_MANIFESTO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_MANIFESTO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_MANIFESTO
+	DROP CONSTRAINT CK_GIS_T1001C_MANIFESTO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_MANIFESTO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_MANIFESTO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_MANIFESTO (
+	CODIGO INT NOT NULL, 
+	VALOR_CARGA FLOAT NOT NULL,
+	VEICULO_CODIGO INT NOT NULL, 
+	MERCADORIA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_MANIFESTO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_MANIFESTO_VEICULO FOREIGN KEY (VEICULO_CODIGO) REFERENCES dbo.GIS_T1001C_VEICULO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_MANIFESTO_MERCADORIA FOREIGN KEY (MERCADORIA_CODIGO) REFERENCES dbo.GIS_T1001C_MERCADORIA (CODIGO)
+);  
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_CARGA
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_CARGA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_CARGA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_CARGA
+	DROP CONSTRAINT CK_GIS_T1001C_CARGA;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_CARGA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_CARGA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_CARGA (
+	CODIGO INT NOT NULL, 
+	TIPO VARCHAR (45) NOT NULL,
+	SEGURO VARCHAR (100) NOT NULL,
+	VIAGEM_CODIGO INT NOT NULL, 
+	MANIFESTO_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_CARGA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_CARGA_VIAGEM FOREIGN KEY (VIAGEM_CODIGO) REFERENCES dbo.GIS_T1001C_VIAGEM (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_CARGA_MANIFESTO FOREIGN KEY (MANIFESTO_CODIGO) REFERENCES dbo.GIS_T1001C_MANIFESTO (CODIGO)
+);  
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- TABELA: dbo.GIS_T1001C_FRETE
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_FRETE')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_FRETE')
+) 
+	ALTER TABLE dbo.GIS_T1001C_FRETE
+	DROP CONSTRAINT CK_GIS_T1001C_FRETE;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_FRETE')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_FRETE;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_FRETE (
+	CODIGO INT NOT NULL, 
+	VALOR FLOAT NOT NULL,
+	TRAJETO_CODIGO INT NOT NULL,
+	FRETE_TABELADO_CODIGO INT NOT NULL, 
+	CARGA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_FRETE PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_FRETE_TRAJETO FOREIGN KEY (TRAJETO_CODIGO) REFERENCES dbo.GIS_T1001C_TRAJETO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_FRETE_TABELA FOREIGN KEY (FRETE_TABELADO_CODIGO) REFERENCES dbo.GIS_T1001C_FRETE_TABELADO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_FRETE_CARGA FOREIGN KEY (CARGA_CODIGO) REFERENCES dbo.GIS_T1001C_CARGA (CODIGO)
+);
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-- TABELA: dbo.GIS_T1001C_HABILITACAO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_HABILITACAO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_HABILITACAO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_HABILITACAO
+	DROP CONSTRAINT CK_GIS_T1001C_HABILITACAO;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_HABILITACAO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_HABILITACAO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_HABILITACAO (
+	CODIGO INT NOT NULL, 
+	DATA_EXPEDICAO DATE NOT NULL,
+	TIPO CHAR NOT NULL, 
+	MOTORISTA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_HABILITACAO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_HABILITACAO_DATA CHECK (DATEDIFF(MONTH, DATA_EXPEDICAO, GETDATE()) >= 5),
+	CONSTRAINT CK_GIS_T1001C_HABILITACAO_TIPO CHECK (TIPO = 'C' OR TIPO = 'D' OR TIPO = 'E'), 
+	CONSTRAINT FK_GIS_T1001C_HABILITACAO_MOTORISTA_CODIGO FOREIGN KEY (MOTORISTA_CODIGO) REFERENCES dbo.GIS_T1001C_MOTORISTA (CODIGO) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_FICHA_MEDICA
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_FICHA_MEDICA')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_FICHA_MEDICA')
+) 
+	ALTER TABLE dbo.GIS_T1001C_FICHA_MEDICA
+	DROP CONSTRAINT CK_GIS_T1001C_FICHA_MEDICA;
+
+IF EXISTS (
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_FICHA_MEDICA')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_FICHA_MEDICA;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_FICHA_MEDICA (
+	CODIGO INT NOT NULL, 
+	DATA_EXAME DATE NOT NULL,
+	DESCRICAO VARCHAR (255) NOT NULL, 
+	MOTORISTA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_FICHA_MEDICA PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT CK_GIS_T1001C_FICHA_MEDICA_DATA CHECK (DATEDIFF(MONTH, DATA_EXAME, GETDATE()) >= 3),
+	CONSTRAINT FK_GIS_T1001C_FICHA_MEDICA_MOTORISTA_CODIGO FOREIGN KEY (MOTORISTA_CODIGO) REFERENCES dbo.GIS_T1001C_MOTORISTA (CODIGO) ON DELETE CASCADE
+);
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-- TABELA: dbo.GIS_T1001C_HISTORICO_MANUTENCAO
+
+
+-- Eliminação da tabela, se existir.
+
+IF EXISTS 
+(
+	SELECT *
+	FROM sys.check_constraints 
+	WHERE object_id = OBJECT_ID(N'dbo.CK_GIS_T1001C_HISTORICO_MANUTENCAO')
+		AND parent_object_id = OBJECT_ID(N'dbo.GIS_T1001C_HISTORICO_MANUTENCAO')
+) 
+	ALTER TABLE dbo.GIS_T1001C_HISTORICO_MANUTENCAO
+	DROP CONSTRAINT CK_GIS_T1001C_HISTORICO_MANUTENCAO;
+
+IF EXISTS 
+(
+	SELECT * 
+	FROM sys.objects 
+	WHERE object_id = OBJECT_ID(N'dbo.GIS_T1001C_HISTORICO_MANUTENCAO')
+		AND TYPE IN (N'U')
+)
+	DROP TABLE dbo.GIS_T1001C_HISTORICO_MANUTENCAO;
+
+
+-- Criação da tabela
+
+CREATE TABLE dbo.GIS_T1001C_HISTORICO_MANUTENCAO(
+	CODIGO INT NOT NULL, 
+	ESPECIFICACAO VARCHAR(45) NOT NULL,
+    VALOR FLOAT NOT NULL,
+	VEICULO_CODIGO INT NOT NULL,
+	OFICINA_CODIGO INT NOT NULL,
+	CONSTRAINT PK_GIS_T1001C_HISTORICO_MANUTENCAO PRIMARY KEY CLUSTERED (CODIGO) WITH FILLFACTOR = 10,
+	CONSTRAINT FK_GIS_T1001C_HISTORICO_VEICULO_CODIGO FOREIGN KEY (VEICULO_CODIGO) REFERENCES dbo.GIS_T1001C_VEICULO (CODIGO),
+	CONSTRAINT FK_GIS_T1001C_HISTORICO_OFICINA_CODIGO FOREIGN KEY (OFICINA_CODIGO) REFERENCES dbo.GIS_T1001C_OFICINA (CODIGO)
+);

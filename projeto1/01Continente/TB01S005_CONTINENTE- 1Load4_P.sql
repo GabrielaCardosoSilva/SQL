@@ -1,0 +1,15 @@
+-- ----------------------------------------------------------------------------------------
+-- Gabriel Issa Shammas (GIS) - 01 de janeiro de 2000 a 31 de dezembro de 2020
+-- ----------------------------------------------------------------------------------------
+-- INS00004- GIS_TB01S005_CONTINENTE
+--
+-- Efetue a eliminação do registro de código 8 desta tabela.
+-- Após a eliminação do registro, reinsira o registro de código conforme descrito abaixo.
+--   (8, 'Fantasia', 'FAN', NULL, NULL, getdate());
+-- Após a inserção do registro, exibir os dados da tabela.
+--
+-- ----------------------------------------------------------------------------------------
+-- Fim TB01S005 INS00004
+-- ----------------------------------------------------------------------------------------
+--
+--

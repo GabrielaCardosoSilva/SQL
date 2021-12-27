@@ -1,0 +1,63 @@
+-- ----------------------------------------------------------------------------------------
+-- Gabriel Issa Shammas (GIS) - 01 de janeiro de 2000 a 31 de dezembro de 2030
+-- ----------------------------------------------------------------------------------------
+-- PROJ003- Oficina Automotiva
+--
+-- GIS ALL-CAR é uma oficina automotiva com padrão e atuação internacional, pertencente  ao
+-- Grupo GIS.
+-- A GIS ALL-CAR  possui filiais em diversos países  e em vários estados do Brasil,  traba-
+-- lhando com diferentes tipos de  automóveis,  utilitários,  caminhões  e quaisquer outros
+-- veículos automotivos. 
+-- Um dos seus propósitos básicos é dar assistência e manutenção nos veículos  das empresas
+-- pertencentes ao grupo GIS.
+-- A oficina mantém um cadastro completo sobre todos os funcionários que atuam e atuaram em
+-- suas dependências.
+-- Os funcionários são contratados por filial, inclusive os mecânicos.
+-- Para todos os funcionários, além de todos os dados cadastrais,  tem-se o grau de escola-
+-- ridade, a instituição em que estudou e o período em que estudou em cada instituição.
+-- Também é feito um controle de todos os dados relativos aos dependentes de cada funcioná-
+-- rio, incluindo o grau de escolaridade.
+-- Além disso, para cada funcionário que atua como mecânico, mantém-se  uma lista de cursos
+-- complementares que eventualmente cada um deles tenha feito, informando, para cada curso:
+-- data de conclusão, título concedido,  instituição onde fez o curso  (com nome,  endereço
+-- e dados cadastrais completos), carga horária e tipo de reparo habilitado.
+-- A oficina analisa previamente o calendário  e o preço dos cursos  nas diversas institui-
+-- ções para agendar os cursos necessários para os funcionários.
+-- A oficina mantém uma lista de todos os veículos que passaram por reparos.
+-- São informados os dados dos veículos (sua marca, modelo, placa, chassis, ano de fabrica-
+-- ção, cor, nome do proprietário, endereço completo do proprietário, telefones e e-mail do
+-- proprietário), o tipo de reparo executado  (por exemplo,  funilaria,  pintura, mecânica,
+-- etc.), a data de início e data de término do reparo.
+-- Quando se trata de veículo pertencente a alguma empresa do grupo (como por exemplo, per-
+-- tencente à transportadora ou à locadora, é feito um registro desse vínculo).
+-- Para cada reparo efetuado em um veículo é feita uma lista de todos os funcionários da o-
+-- ficina que trabalharam no reparo,  informando a data de início  e de término de ação  de
+-- cada funcionário, o salário dele e o valor hora/homem.
+-- Cada veículo pode passar por mais de um reparo.
+-- Cada filial da oficina oferece todos os tipos de reparos, inclusive auxílio-socorro.
+-- A oficina mantém uma relação atualizada  dos seus fornecedores e das respectivas  peças,
+-- de modo a garantir a qualidade dos serviços prestados. Graças a isso, é possível efetuar
+-- um acompanhamento de todas as peças trocadas na oficina,  o que permite uma garantia mí-
+-- nima de 90 (noventa) dias para a maioria dos serviços prestados.
+-- A oficina também poderá atender companhias de seguros de automóveis.
+-- A oficina mantém um cadastro atualizado das Companhias de Seguro com que trabalha, indi-
+-- cando a data de validade do convênio.
+-- Antes de realizar todo e qualquer serviço,  é preparado um orçamento  para que o cliente
+-- tenha conhecimento dos serviços necessários e dos valores envolvidos e,  somente  após o
+-- aceite do orçamento, é que os serviços são iniciados.
+-- Orçamentos rejeitados não são guardados.
+-- Como política de qualidade, caso os serviços não sejam  completados na data prevista  ou
+-- caso o cliente reclame de alguma falha, a oficina oferece um desconto de até  5%  (cinco
+-- por cento) sobre a fatura,
+-- Ainda dentro da política de qualidade,  o cadastro de clientes  deve ser o mais completo
+-- possível, indicando inclusive a relação de dependentes,  o mesmo valendo para o cadastro
+-- do veículo, que deve registrar o uso do mesmo (se é apenas para passeio, para trabalho e
+-- passeio, etc.), o perfil da garagem (ao relento, garagem fechada, garagem aberta, etc.),
+-- a existência ou não de alarme  (preferencialmente com marca)  e outras informações rele-
+-- vantes para estabelecer o melhor perfil possível tanto do cliente como do veículo.
+--
+-- ----------------------------------------------------------------------------------------
+-- Fim PROJ003- Oficina Automotiva
+-- ----------------------------------------------------------------------------------------
+--
+--

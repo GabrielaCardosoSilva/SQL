@@ -1,0 +1,30 @@
+-- ----------------------------------------------------------------------------------------
+-- Gabriel Issa Shammas (GIS) - 01 de janeiro de 2000 a 31 de dezembro de 2030
+-- ----------------------------------------------------------------------------------------
+-- T1126A- PROJ003-
+--        Etapa 01- Gerar os scripts de criação das tabelas.
+--         ATENÇÃO: Vincular este projeto com o Proj001, através da tabela de CIDADES,  que
+--                  consta no Banco de Dados Geográfico (Projeto 001).
+--                  (Orientação a respeito é dada em aula)
+--         ATENÇÃO: Verificar se existem outros vínculos possíveis e, se existirem, efetuar
+--                  estes vínculos (por exemplo, vínculo com o Projeto 002).
+--         ATENÇÃO: Definir corretamente os domínios para as colunas conforme a necessidade
+--                  através de declarações CONSTRAINT.
+--         ATENÇÃO: Cada comando Create Table deve ser precedido do respectivo comando Drop
+--                  Table.
+--         ATENÇÃO: A entrega pode ser feita através de um único script com todos os coman-
+--                  dos Create Table, na sequência correta de criação.
+--
+-- T1126B- PROJ003-
+--        Etapa 02- Gerar os scripts de carga das tabelas.
+--                  Carregar um mínimo de 4 linhas por tabela.
+--         ATENÇÃO: Para cada tabela, a sequência de carga deve ser precedido por um coman-
+--                  do  DELETE From NomeTabela.
+--         ATENÇÃO: A entrega pode ser feita através de um único script com todos os coman-
+--                  dos INSERT, na sequência correta de carga.
+--
+-- ----------------------------------------------------------------------------------------
+-- Fim LBD Query
+-- ----------------------------------------------------------------------------------------
+--
+--
